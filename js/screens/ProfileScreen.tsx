@@ -1,41 +1,14 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Image, ScrollView } from 'react-native';
 import Styles from '../styles/Styles';
-import FoodItem from '../components/FoodItem';
 
-export default class FoodSelectionScreen extends React.PureComponent<any> {
+export default class ProfileScreen extends React.PureComponent<any> {
     render() {
         return (
-            <View style={Styles.container}>
-                {foodItems.map(foodItem =>
-                <FoodItem {...foodItem}/>)}
-            </View>
+            <ScrollView contentContainerStyle={{width: '100%'}}>
+            <Image source={require('../../assets/profile-wasted.png')} style={{width: '100%'}} resizeMode='contain' />
+            </ScrollView>
         )
+
     }
 }
-
-const foodItems = [{
-    image: require('../../assets/carrots.png'),
-    foodName: 'Carrot',
-    foodExpiry: '18/09/2019'
-},
-{
-    image: require('../../assets/milk.png'),
-    foodName: 'Milk',
-    foodExpiry: '14/09/2019'
-},
-{
-    image: require('../../assets/apple.png'),
-    foodName: 'Apple',
-    foodExpiry: '17/09/2019'
-},
-{
-    image: require('../../assets/tomato.png'),
-    foodName: 'Tomato',
-    foodExpiry: '15/09/2019'
-},
-{
-    image: require('../../assets/egg.png'),
-    foodName: 'Egg',
-    foodExpiry: '24/09/2019'
-}]

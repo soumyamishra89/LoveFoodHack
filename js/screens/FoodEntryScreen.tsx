@@ -66,15 +66,17 @@ export default class FoodEntryCameraScreen extends React.PureComponent<any, Stat
                 </View>
               </View>
               <View style={[{backgroundColor: colors.appGreen, alignItems: 'center', height: 212, justifyContent: 'center', marginHorizontal: 16, width: '100%', alignSelf: 'center', marginTop: 16 }]}>
-              {!!this.state.scannedItem ? <View style={styles.cameraView}>
-                  <Image source={this.state.scannedItem} style={{width: '100%', height: '100%'}}/></View> : 
-                  <View style={{paddingHorizontal: 24, alignItems: 'center'}}><Text style={{color: colors.appBlue, fontSize: 36}}>{'Scan food items that you want to add to the list'}</Text></View>}
+              {/* {!!this.state.scannedItem ? <View style={styles.cameraView}>
+                  <Image source={this.state.scannedItem} style={{width: '100%', height: '100%'}}/></View> :  */}
+                  <View style={{paddingHorizontal: 24, alignItems: 'flex-start'}}><Text style={{color: colors.appBlue, fontSize: 36}}>{this.state.scannedItem ? foodItems[0].funFact : 'Scan food items that you want to add to the list'}</Text>
+                  {this.state.scannedItem && <Text style={{fontSize: 16}}>{'\n(Shelf life: ' + foodItems[0].shelfLife + ')'}</Text>}
+                  </View>
               </View>
               <View style={{ flex: 0.5, flexDirection: 'row', justifyContent: 'center' }}>
                 <TouchableOpacity onPress={this.takePicture} style={styles.capture}>
                   <Text style={{ fontSize: 14, color: colors.appBlue }}> {!!this.state.scannedItem && 'RESCAN' || 'SCAN'} </Text>
                 </TouchableOpacity>
-                {!!this.state.scannedItem &&<TouchableOpacity onPress={this.addToList} style={styles.capture}>
+                {!!this.state.scannedItem && <TouchableOpacity onPress={this.addToList} style={styles.capture}>
                   <Text style={{ fontSize: 14,color: colors.appBlue }}> {'ADD'} </Text>
                 </TouchableOpacity>}
               </View>
@@ -83,7 +85,7 @@ export default class FoodEntryCameraScreen extends React.PureComponent<any, Stat
   }
 
   addToList = () => {
-    this.props.navigation.navigate('Main', {scannedItem: this.state.scannedItem})
+    this.props.navigation.navigate('SummaryScreen', {scannedItem: this.state.scannedItem})
   }
 
   onTextRecognised = ({textBlocks}: any) => {
@@ -100,6 +102,32 @@ export default class FoodEntryCameraScreen extends React.PureComponent<any, Stat
   };
 }
 
+const foodItems = [
+  {
+      foodName: 'Apples',
+      funFact: `Don't put the apples in the refrigerator`,
+      shelfLife: '1.5 weeks'
+  },
+  {
+      foodName: 'Milk',
+      funFact: 'Put the milk in the refrigerator',
+      shelfLife: '1 week'
+  },
+  {
+      foodName: 'Tomatoes',
+      funFact: `Don't put the tomatoes in the refrigerator`,
+      shelfLife: '1.5 weeks'
+  },
+  {
+      foodName: 'Carrots',
+      funFact: `Don't put the carrots in the refrigerator`,
+      shelfLife: '1.5 weeks'
+  },
+  {
+      foodName: 'Eggs',
+      funFact: 'Put the eggs in the refrigerator',
+      shelfLife: '2 weeks'
+  }];
 
 const styles = StyleSheet.create({
     cameraContainer: {

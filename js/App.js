@@ -9,25 +9,24 @@
  */
 
 import React from 'react';
-import { Platform, Text } from 'react-native';
+import {Text} from 'react-native';
 import { createAppContainer } from 'react-navigation';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
-import IoniconIcon from 'react-native-vector-icons/Ionicons';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import StatisticsScreen from './screens/StatisticsScreen';
+import IoniconIcon from 'react-native-vector-icons/Ionicons';
 import FoodEntryScreen from './screens/FoodEntryScreen';
+import SummaryScreen from './screens/SummaryScreen';
+import WelcomeScreen from './screens/WelcomeScreen';
+import WebviewScreen from './screens/WebviewScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import Styles from './styles/Styles';
-import WelcomeScreen from './screens/WelcomeScreen';
-
 const AppContainer = createAppContainer(
   createStackNavigator({
-    Welcome: WelcomeScreen,
-    FoodEntryScreen: FoodEntryScreen,
-    Main: createBottomTabNavigator({
-        Home: ProfileScreen,       
-        Challenges: StatisticsScreen
+    Welcome: createBottomTabNavigator({
+      Home: WelcomeScreen,       
+      SummaryScreen: SummaryScreen,
+      ProfileScreen: ProfileScreen
       }, {
         tabBarOptions: {
           style: Styles.navBottomBar,
@@ -40,11 +39,11 @@ const AppContainer = createAppContainer(
           tabBarIcon: ({ focused, tintColor }) => {
             let imageSource;
             if (routeName === 'Home') {
+              imageSource = <MaterialIcon name={'home-outline'} style={[Styles.tabBarIcon, {opacity: focused ? 1 : 0.8}]} color={'white'} size={focused ? 28 : 24} />;
+            } else if (routeName === "ProfileScreen") {
+              imageSource = <IoniconIcon name={'md-contact'} style={[Styles.tabBarIcon, {opacity: focused ? 1 : 0.8}]} color={'white'} size={focused ? 28 : 24} />;
+            } else if (routeName === 'SummaryScreen') {
               imageSource = <MaterialIcon name={'food'} style={[Styles.tabBarIcon, {opacity: focused ? 1 : 0.8}]} color={'white'} size={focused ? 28 : 24} />;
-            } else if (routeName === "Camera") {
-              imageSource = <IoniconIcon name={'md-camera'} style={[Styles.tabBarIcon, {opacity: focused ? 1 : 0.8}]} color={'white'} size={focused ? 28 : 24} />;
-            } else if (routeName === 'Challenges') {
-              imageSource = <IoniconIcon name={'ios-contact'} style={[Styles.tabBarIcon, {opacity: focused ? 1 : 0.8}]} color={'white'} size={focused ? 28 : 24} />;
             } else {
               return null;
             }
@@ -53,11 +52,11 @@ const AppContainer = createAppContainer(
           tabBarLabel: ({ focused, tintColor }) => {
             let text;
             if (routeName === 'Home') {
-              text = 'Food';
-            } else if (routeName === "Camera") {
-              text = 'Scan';
-            } else if (routeName === 'Challenges') {
-              text = 'Challenges';
+              text = 'Home';
+            } else if (routeName === "ProfileScreen") {
+              text = 'Profile';
+            } else if (routeName === 'SummaryScreen') {
+              text = 'Summary';
             } else {
               return null;
             }
@@ -70,9 +69,12 @@ const AppContainer = createAppContainer(
           },
         }
       }
-      })
+    }),
+    FoodEntryScreen: FoodEntryScreen,
+    WebviewScreen: WebviewScreen    
     }, {
-      headerMode: 'none'
+      headerMode: 'none',
+      // initialRouteName: 'Home'
     })
 )
 
