@@ -58,7 +58,7 @@ export default class SummaryScreen extends React.PureComponent<any, any> {
                     <Image source={require('../../assets/btn-our-kitchen.png')} style={{height: 48, width: 340, marginTop: 16}} resizeMode='contain'/>
                     <View style={{flexDirection: 'row', justifyContent: 'space-between', position: 'absolute', bottom: 16, left: 16, width: '100%'}}>
                         <Text onPress={() => this.onTabSelection(0)} style={{color: this.state.currentIndex === 0 ? colors.appPink : 'white', alignSelf: 'center', marginTop: 16}}>{'SUMMARY'}</Text>
-                        <Text onPress={() => this.onTabSelection(1)} style={{color: this.state.currentIndex === 1 ? colors.appPink : 'white', alignSelf: 'center', marginTop: 16}}>{'RECIPES'}</Text>
+                        <Text onPress={() => this.onTabSelection(1)} style={{color: this.state.currentIndex === 1 ? colors.appPink : 'white', alignSelf: 'center', marginTop: 16}}>{'CHALLENGES'}</Text>
                     </View>
                 </View>
                 <ScrollView 

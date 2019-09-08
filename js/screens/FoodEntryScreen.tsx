@@ -31,9 +31,9 @@ export default class FoodEntryCameraScreen extends React.PureComponent<any, Stat
 
     addmore = async () => {
       await this.takePicture();
-      this.setState({index: (this.state.index >= (foodItems.length - 1)) ? 0 : this.state.index + 1});
+      this.setState({value: 1, index: (this.state.index >= (foodItems.length - 1)) ? 0 : this.state.index + 1});
     }
-    
+
     render() {
         const { focusedScreen } = this.state;
         if (!focusedScreen) {
