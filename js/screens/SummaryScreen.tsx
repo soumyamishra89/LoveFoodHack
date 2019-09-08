@@ -55,7 +55,7 @@ export default class SummaryScreen extends React.PureComponent<any, any> {
                         <Ionicons name='ios-contact' size={36} color={colors.appOrange}/>
                         <Text style={{marginLeft: 16, color: colors.appBlue}}>{'Hello, \nSmith family'}</Text>
                     </View>
-                    <Image source={require('../../assets/savings-btn.png')} style={{height: 48, width: 340, marginTop: 16}} resizeMode='contain'/>
+                    <Image source={require('../../assets/btn-our-kitchen.png')} style={{height: 48, width: 340, marginTop: 16}} resizeMode='contain'/>
                     <View style={{flexDirection: 'row', justifyContent: 'space-between', position: 'absolute', bottom: 16, left: 16, width: '100%'}}>
                         <Text onPress={() => this.onTabSelection(0)} style={{color: this.state.currentIndex === 0 ? colors.appPink : 'white', alignSelf: 'center', marginTop: 16}}>{'SUMMARY'}</Text>
                         <Text onPress={() => this.onTabSelection(1)} style={{color: this.state.currentIndex === 1 ? colors.appPink : 'white', alignSelf: 'center', marginTop: 16}}>{'RECIPES'}</Text>

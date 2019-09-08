@@ -3,9 +3,14 @@ import {
     View, StyleSheet, BackHandler, TouchableOpacity, ImageBackground, Image, Text, Share
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import Slider from '@react-native-community/slider';
 import colors from '../styles/colors';
 
-export default class Dialog extends React.PureComponent<any> {
+export default class Dialog extends React.PureComponent<any, any> {
+    state = {
+        value: 1
+    }
+
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.onBack);
     }
@@ -37,12 +42,22 @@ export default class Dialog extends React.PureComponent<any> {
                     </TouchableOpacity>
                     </ImageBackground> :
                 <ImageBackground source={this.props.isCancel ? require('../../assets/point-lose.png') : require('../../assets/points-won.png')} style={{height: '100%', width: '100%', alignItems: 'center', justifyContent: 'center'}} resizeMode='cover'>
-                    <Image source={this.props.data.image} style={{height: 48, width: 48, borderRadius: 24}} resizeMode='cover' />
-                    <Text style={{color: colors.appBlue, marginTop: 16}}>{this.props.data.foodName + (this.props.isCancel ? '\nWasted' : '\nSaved')}</Text>
+                    <Image source={this.props.data.image} style={{height: 48, width: 48, borderRadius: 24, marginTop: 16}} resizeMode='cover' />
+                    <Text style={{color: colors.appBlue, marginTop: 16}}>{this.props.data.foodName + (this.props.isCancel ? '\nWasted: ' : '\nSaved')}
+                    {this.props.isCancel && <Text style={{color: colors.appOrange}}>{this.state.value}</Text>}</Text>
+                    {this.props.isCancel && <Slider
+                        style={{width: '100%', height: 40}}
+                        minimumValue={1}
+                        maximumValue={10}
+                        step={1}
+                        minimumTrackTintColor={colors.appBlue}
+                        maximumTrackTintColor="#000000"
+                        onValueChange={(value: number) => this.setState({value})}
+                    />}
                     <TouchableOpacity style={{position: 'absolute', right: 0, top: 0}} onPress={this.props.hide}>
                         <Icon name='close' size={24} />
                     </TouchableOpacity>
-                    <View style={{flexDirection: 'row', marginTop: 36, alignItems: 'center', marginBottom: 24}}>
+                    <View style={{flexDirection: 'row', marginTop: 8, alignItems: 'center'}}>
                         <View style={{height: 36, width: 36, borderRadius: 18, backgroundColor: colors.appOrange, justifyContent: 'center', alignItems: 'center'}}>
                             <Icon name='star' size={24} color='white' />
                         </View>
